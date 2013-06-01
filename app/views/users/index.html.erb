@@ -1,0 +1,29 @@
+<html>
+	<head>
+<% content_for :title do %>
+  Display all users
+<% end %>
+	</head>
+	<body>
+		<h1>Index of Users</h1>
+		<a href="<%= new_user_path %>">Create New User</a></p>
+		<table border='1'>
+			<thead>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>E-mail Address</th>
+					<th>Display User Page</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @users.each do |user| %>
+					<tr><td> <%= user.first_name %> </td>
+					<td> <%= user.last_name %> </td>
+					<td> <%= user.email_address %> </td>
+					<td> <a href=<%= user_path(user.id) %>> Click Here</a></td></tr>
+				<% end %>
+			</tbody>
+		</table>
+	</body>
+</html>
