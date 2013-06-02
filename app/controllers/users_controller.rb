@@ -11,9 +11,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to @user, notice: 'User was successfully created.'
+      flash[:success] = 'User was successfully updated'
+      redirect_to @user
     else
-      render :text => "here"
+      render @user
+      # render :text => "create_ack"
       # render action: "new"
     end
   end
@@ -39,17 +41,36 @@ class UsersController < ApplicationController
 
   def update
     @user=User.find(params[:id])
-      if @user.update_attributes(params[:id])
+      if @user.update_attributes(params[:user])
+      # if @user.update(params[:id])
+        flash[:success] = 'User was successfully updated'
         redirect_to @user
       else
 ##next line is pseudo-code?        
-        render edit page
+        render :text => "update_ack"
+        # render edit page
       end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    # flash[:success] = 'User was deleted with success.'
+    redirect_to users_path
+  end
+
+  # def destroy
+  #   User.find(params[:id]).destroy
+  #   # flash[:success] = "User destroyed."
+  #   # redirect_to users_url
+  # end
+
   def delete
     User.find(params[:id]).destroy
-##next line is pseudo-code?
-    render index
+  #   @user = User.find(params[:id])
+  #   @user.destroy
+  #   flash[:success] = 'User was deleted with success.'
+  #   redirect_to users_path
+  #   # render index
   end
 end

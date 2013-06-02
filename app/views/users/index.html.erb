@@ -14,6 +14,8 @@
 					<th>Last Name</th>
 					<th>E-mail Address</th>
 					<th>Display User Page</th>
+					<th>Edit User Information</th>
+					<th>Eradicate User's Existence</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -21,7 +23,13 @@
 					<tr><td> <%= user.first_name %> </td>
 					<td> <%= user.last_name %> </td>
 					<td> <%= user.email_address %> </td>
-					<td> <a href=<%= user_path(user.id) %>> Click Here</a></td></tr>
+					<td> <a href=<%= user_path(user.id) %>> Click Here</a></td>
+					<td> <a href="<%= user_path(user.id) %>/edit"> Edit User <% user.id %></a></td>
+					<td> <form action="<%= user_path(user.id) %>" method ="post">
+							<input type="hidden" name="_method" value="delete" />
+							<input type="submit" value="Delete User" />
+						</form></td>
+					</tr>
 				<% end %>
 			</tbody>
 		</table>
